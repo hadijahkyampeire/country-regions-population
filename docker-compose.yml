@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  population_server: #container name
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    entrypoint: ['/usr/src/api/entrypoint.sh']
+    volumes:
+      - ./api/:/usr/src/api
+    ports: 
+      - 5000:5000
+    environment: 
+      - FLASK_APP=project/__init__.py
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgresql://postgres:postgres@population-db:5432/population_dev
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@population-db:5432/population_test
+    depends_on: 
+      - population_db
+
+  population_client: #container name
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app/:/usr/src/app
+      - '/usr/src/app/node_modules'
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+
+  population_db:
+    build:
+      context: ./api/project/db
+      dockerfile: Dockerfile
+    expose: 
+      - 5432
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
