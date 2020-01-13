@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies
 RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev && \
-    apk add postgresql-dev && \
+    apk add postgresql-dev bind-tools && \
     apk add netcat-openbsd
 
 #set working dir

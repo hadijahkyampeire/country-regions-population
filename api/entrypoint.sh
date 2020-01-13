@@ -3,7 +3,7 @@
 echo "Waiting for postgres..."
 ​# nc- netcat command in bash
 # z- zero so -z means its not zero
-while ! nc -z population-db 5432; do
+while ! nc -z population_db 5432; do
     sleep 0.1
 done
 ​

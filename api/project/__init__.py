@@ -1,30 +1,29 @@
 import os
-from flask import Flask, jsonify
-from flask_restful import Resource, Api
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-api = Api(app)
-
-app_settings = os.getenv("APP_SETTINGS")
-app.config.from_object(app_settings)
-
 # instantiate db
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
-class Population(db.Model):
-  __tablename__ = 'population'
-  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-  village = db.Column(db.String(128))
+def create_app(script_info=None):
 
-  def __init__(self, village):
-    self.village = village
+  # instantiate the app
+  app = Flask(__name__)
 
-class Ping(Resource):
-  def get(self):
-    return {
-      'status':'success',
-      'message': 'heyyy'
-    }
+  # set config
+  app_settings = os.getenv('APP_SETTINGS')
+  app.config.from_object(app_settings)
 
-api.add_resource(Ping, '/ping')
+  # set up extensions
+  db.init_app(app)
+
+  # register blueprints
+  from project.population.people import population_blueprint
+  app.register_blueprint(population_blueprint)
+
+  # shell context for flask cli
+  @app.shell_context_processor
+  def ctx():
+      return {'app': app, 'db': db}
+
+  return app
