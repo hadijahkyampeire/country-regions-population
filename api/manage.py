@@ -1,7 +1,8 @@
 from flask.cli import FlaskGroup
-from project import app, db
+from project import create_app, db
+from project.population.models import People
 
-cli = FlaskGroup(app)
+cli = FlaskGroup(create_app)
 
 
 @cli.command("recreate_db")
