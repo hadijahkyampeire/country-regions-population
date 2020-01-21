@@ -1,0 +1,31 @@
+@import '../../../shared';
+
+.region {
+  background-color: #00008b;
+  margin-top: 3rem;
+  padding: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  .person {
+    display: flex;
+    flex-direction: column;
+    background-color: $lightsteelblue;
+    color: #000;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    span.badge{
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+    .personal-info, .location-specifics {
+      display: flex;
+      justify-content: space-between;
+    }
+    .name {
+      font-weight: bold;
+    }
+  }
+
+}

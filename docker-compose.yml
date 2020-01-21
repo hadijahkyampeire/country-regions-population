@@ -21,13 +21,13 @@ services:
 
   population_client: #container name
     build:
-      context: ./app
+      context: ./ui
       dockerfile: Dockerfile
     volumes:
-      - ./app/:/usr/src/app
+      - ./ui/:/usr/src/app
       - '/usr/src/app/node_modules'
     ports:
-      - 3000:3000
+      - 3005:3000
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true

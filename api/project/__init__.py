@@ -1,9 +1,11 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 # instantiate db
 db = SQLAlchemy()
+cors = CORS()
 
 def create_app(script_info=None):
 
@@ -16,6 +18,7 @@ def create_app(script_info=None):
 
   # set up extensions
   db.init_app(app)
+  cors.init_app(app)
 
   # register blueprints
   from project.population.people import population_blueprint

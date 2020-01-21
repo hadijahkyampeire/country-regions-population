@@ -1,0 +1,22 @@
+@import '../../shared';
+
+.pp-nav {
+  height: 3rem;
+  background-color: $app_blue;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 1.25rem;
+  a {
+    color: #fff;
+    font-weight: bold;   
+  }
+  a.chosen {
+    color: greenyellow;
+  }
+
+  .right-section a {
+    padding-right: 1rem;
+  }
+}
