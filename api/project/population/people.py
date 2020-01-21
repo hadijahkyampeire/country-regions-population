@@ -41,7 +41,7 @@ class PeopleList(Resource):
         persons = People.query.all()
         print(request.args)
         # query = request.args.get('district').lower()
-        region = request.args.get('region').lower()
+        region = request.args.get('region', '').lower()
         # if query:
         #     persons = People.query.filter_by(district=query).all()
         if region:
