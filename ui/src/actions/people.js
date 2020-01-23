@@ -3,42 +3,35 @@ export const FETCH_PEOPLE_SUCCESS = 'FETCH_PEOPLE_SUCCESS';
 export const FETCH_PEOPLE_ERROR = 'FETCH_PEOPLE_ERROR';
 
 const BASE_URL = 'http://localhost:5000';
-const fetchPeoplePending = () => {
+export const fetchPeoplePending = () => {
   return {
     type: FETCH_PEOPLE_PENDING
   };
 };
 
-const fetchPeopleSuccess = people => {
+export const fetchPeopleSuccess = people => {
   return {
     type: FETCH_PEOPLE_SUCCESS,
     payload: people
   };
 };
 
-const fetchPeopleError = error => {
+export const fetchPeopleError = error => {
   return {
     type: FETCH_PEOPLE_ERROR,
     error: error
   };
 };
 
-const fetchPeople = (region) => {
-  return dispatch => {
+const fetchPeople = (region) => (dispatch, getState, { http }) => {
     dispatch(fetchPeoplePending());
-    fetch(region ?`${BASE_URL}/people?region=${region}`:`${BASE_URL}/people`, { method: 'get' })
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          throw res.error;
-        }
-        dispatch(fetchPeopleSuccess(res.data.people));
-        return res.data.people;
+    return http
+      .get(region?`${BASE_URL}/people?region=${region}`:`${BASE_URL}/people`)
+      .then(response => {
+        dispatch(fetchPeopleSuccess(response.data.people));
       })
-      .catch(error => {
-        dispatch(fetchPeopleError(error));
-      });
+      .catch(error => dispatch(fetchPeopleError(error)));
   };
-};
+
 
 export { fetchPeople };
