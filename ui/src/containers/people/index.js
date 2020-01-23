@@ -6,6 +6,17 @@ import './__styles__/index.scss';
 
 export * from './region';
 
+const RegionFilters = {
+  label: 'Filter By Region',
+  options: [
+    { value: 'all', label: 'All' },
+    { value: 'western', label: 'Western' },
+    { value: 'eastern', label: 'Eastern' },
+    { value: 'central', label: 'Central' },
+    { value: 'northern', label: 'Northern' },
+    { value: 'southern', label: 'Southern' }
+  ]
+};
 class People extends React.Component {
   render() {
     return (
@@ -16,7 +27,7 @@ class People extends React.Component {
           </h4>
         </div>
         <div className="regions-container">
-          <Filters />
+          <Filters filters={RegionFilters}/>
           <Regions />
         </div>
       </section>

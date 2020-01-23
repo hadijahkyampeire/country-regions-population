@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "fetch-mock": "^8.3.1",
+    "node-fetch": "^2.6.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -15,12 +17,15 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "testcafe": "^1.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll",
+    "test:e2e": "testcafe chrome src/e2e/e2e.js",
+    "test:all": "yarn test:e2e && yarn test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -40,7 +45,8 @@
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2"
+    "enzyme-adapter-react-16": "^1.15.2",
+    "webdriverio": "^5.18.6"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -49,7 +55,8 @@
       "!**/src/index.js",
       "!**/store.js",
       "!**/*.eslintrc.js",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/src/e2e/**"
     ]
   }
 }

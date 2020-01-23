@@ -31,8 +31,10 @@ export const people = (state = initialState, action) => {
 };
 
 export const getPeople = (region, state) => {
-  return region ? state.people.people.filter(person => person.region === region): state.people.people
-  }
+  return region
+    ? state.people.people.filter(person => person.region === region)
+    : state.people.people;
+};
 
 export const getPeoplePending = state => state.people.pending;
 export const getPeopleError = state => state.people.error;

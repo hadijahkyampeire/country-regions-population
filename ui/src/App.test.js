@@ -3,13 +3,16 @@ import enzyme from 'enzyme';
 import { Provider } from 'react-redux';
 import App from './App';
 
-import { makeStore } from 'utils/tests';
+import { makeStore, alwaysSuccess } from 'utils/tests';
 
 test('renders app correctly', () => {
-  const initialState = {
-    people: { people: [{ id: 1, name: 'me' }] }
+  const state = {
+    people: { people: [{ id: 1, name: 'me' }], pending: false, error: 'something wrong' }
   };
-  const store = makeStore(initialState);
+  const http = {
+    get: alwaysSuccess({})
+  };
+  const store = makeStore({ http }, state);
 
   const app = enzyme.mount(
     <Provider store={store}>

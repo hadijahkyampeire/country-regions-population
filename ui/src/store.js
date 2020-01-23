@@ -1,17 +1,16 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import rootReducer from './reducers';
+import reducers from './reducers';
+import http from 'utils/http';
 
-const middleWare = [];
-
-middleWare.push(thunk);
-
-const loggerMiddleware = createLogger({
-  predicate: () => process.env.NODE_ENV === 'development'
-});
-middleWare.push(loggerMiddleware);
-
-export default function configureStore(initialState = {}) {
-  return createStore(rootReducer, initialState, compose(applyMiddleware(...middleWare)));
+const thunk = reduxThunk.withExtraArgument({ http });
+export default function configureStore() {
+  const initialState = {};
+  const middlewareByEnv = {
+    development: () => [thunk, createLogger()],
+    production: () => [thunk]
+  };
+  const middleware = middlewareByEnv[process.env.NODE_ENV]();
+  return createStore(reducers, initialState, applyMiddleware(...middleware));
 }
