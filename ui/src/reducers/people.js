@@ -2,7 +2,7 @@ import { FETCH_PEOPLE_PENDING, FETCH_PEOPLE_SUCCESS, FETCH_PEOPLE_ERROR } from '
 
 const initialState = {
   pending: false,
-  people: [],
+  people: {},
   error: null
 };
 
@@ -17,7 +17,8 @@ export const people = (state = initialState, action) => {
       return {
         ...state,
         pending: false,
-        people: [...state.people, ...action.payload]
+        people: { ...state.people, [action.region]: action.payload },
+  
       };
     case FETCH_PEOPLE_ERROR:
       return {
@@ -30,10 +31,9 @@ export const people = (state = initialState, action) => {
   }
 };
 
+
 export const getPeople = (region, state) => {
-  return region
-    ? state.people.people.filter(person => person.region === region)
-    : state.people.people;
+  return  state.people.people[region] || []
 };
 
 export const getPeoplePending = state => state.people.pending;

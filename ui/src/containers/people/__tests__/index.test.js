@@ -1,25 +1,38 @@
 import React from 'react';
 import enzyme from 'enzyme';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 
 import { People } from '../index';
 import { makeStore, alwaysSuccess } from 'utils/tests';
 
 describe('People container', () => {
   const state = {
-    people: { people: [{ id: 1, name: 'me' }], pending: false, error: 'something wrong' }
+    people: {
+      people: { undefined: [{ id: 1, name: 'me' }] },
+      pending: false,
+      error: 'something wrong'
+    }
   };
   const http = {
     get: alwaysSuccess()
   };
   const store = makeStore({ http }, state);
+  const stubHistory = () => ({
+    push: jest.fn()
+  });
+  const mocks = () => ({ history: stubHistory(), fetchPeople: jest.fn() });
   const container = props =>
     enzyme.mount(
       <Provider store={store}>
-        <People {...props} />
+        <MemoryRouter>
+          <People {...props} {...mocks()} />
+        </MemoryRouter>
       </Provider>
     );
-  const people = container();
+
+  const location = { pathname: '/people', search: '' };
+  const people = container({ location });
   it('Renders properly', () => {
     expect(people.find('.header h4').text()).toEqual(
       'See all people from various regions, you can filter by region to reduce the view results'
@@ -37,5 +50,19 @@ describe('People container', () => {
     const person = people.find('Person');
     expect(person).toHaveLength(1);
     expect(person.find('.name').text()).toEqual('me');
+  });
+
+  it('state changes', () => {
+    const setState = jest.fn();
+    const useStateSpy = jest.spyOn(React, 'useState');
+    useStateSpy.mockImplementation(init => [init, setState]);
+    const useEffect = jest.spyOn(React, 'useEffect');
+    useEffect.mockImplementationOnce(f => f());
+    people
+      .find('FilterSelect span.checkbox')
+      .at(2)
+      .simulate('click');
+    // console.log(people.debug());
+    expect(setState).toHaveBeenCalledWith('all');
   });
 });
