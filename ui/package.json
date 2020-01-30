@@ -26,6 +26,7 @@
     "test": "react-scripts test --watchAll",
     "test:e2e": "testcafe chrome src/e2e/e2e.js",
     "test:all": "yarn test:e2e && yarn test",
+    "test:coverage": "yarn test -- --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

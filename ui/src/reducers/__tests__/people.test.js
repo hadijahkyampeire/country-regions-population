@@ -5,18 +5,19 @@ describe('Get People Reducer', () => {
   it('should not change state if no action passed', () => {
     expect(people(undefined, {})).toEqual({
       pending: false,
-      people: [],
+      people: {},
       error: null
     });
   });
 
   it('should handle getting people successfully', () => {
-    const state = { people: [] };
-    const responseData = [{ id: 1, name: 'me me' }];
+    const state = { people: {} };
+    const region = 'some';
+    const responseData = { people: [] };
 
-    expect(people(state, fetchPeopleSuccess(responseData))).toEqual({
+    expect(people(state, fetchPeopleSuccess(responseData, region))).toEqual({
       pending: false,
-      people: responseData
+      people: { some: responseData }
     });
   });
 

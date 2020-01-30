@@ -1,8 +1,38 @@
+@import '../../shared';
+
 .checkbox {
-  input {
-    margin-right: 0.5rem;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: transparent;
+  border: 1px solid #fff;
+
+  &:hover {
+    background-color: $app-blue;
   }
-  label {
-    color: #000080;
+
+  &.checked {
+    background-color: $app-blue;
+    border-color: $app-blue;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 11px;
+    border: solid #fff;
+    border-width: 0px 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  &.checked:after {
+    display: block;
   }
 }

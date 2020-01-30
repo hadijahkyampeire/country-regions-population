@@ -9,10 +9,11 @@ export const fetchPeoplePending = () => {
   };
 };
 
-export const fetchPeopleSuccess = people => {
+export const fetchPeopleSuccess = (people, region) => {
   return {
     type: FETCH_PEOPLE_SUCCESS,
-    payload: people
+    payload: people,
+    region: region
   };
 };
 
@@ -28,7 +29,7 @@ const fetchPeople = (region) => (dispatch, getState, { http }) => {
     return http
       .get(region?`${BASE_URL}/people?region=${region}`:`${BASE_URL}/people`)
       .then(response => {
-        dispatch(fetchPeopleSuccess(response.data.people));
+        dispatch(fetchPeopleSuccess(response.data.people, region));
       })
       .catch(error => dispatch(fetchPeopleError(error)));
   };

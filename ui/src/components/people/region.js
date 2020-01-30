@@ -26,9 +26,9 @@ const Person = ({ person }) => {
 };
 
 const RegionWidget = ({ people, fetchPeople, region }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     fetchPeople(region);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

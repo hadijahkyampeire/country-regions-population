@@ -1,14 +1,16 @@
 import React from 'react';
+// import classnames from 'classnames';
 
 import './checkbox.scss';
 
-export const CheckBox = ({ label, isChecked = false, toggleCheckboxChange = () => {} }) => {
+const CheckBox = ({ checked, onChange, ...props }) => {
   return (
-    <div className="checkbox">
-      <label>
-        <input type="checkbox" value={label} checked={isChecked} onChange={toggleCheckboxChange} />
-        {label}
-      </label>
-    </div>
-  );
+  <span {...props} className={`checkbox ${checked ? 'checked': null}`} onClick={() => onChange(!checked)} />
+)};
+
+CheckBox.defaultProps = {
+  checked: false,
+  onChange: () => {}
 };
+
+export { CheckBox };

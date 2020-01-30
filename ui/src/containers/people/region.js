@@ -9,7 +9,7 @@ const mapStateToProps = (state, {region} )=> ({
   people: getPeople(region, state),
   pending: getPeoplePending(state)
 })
-const mapDispatchToProps = { fetchPeople: (region) => fetchPeople(region) };
+export const mapDispatchToProps = { fetchPeople: (region) => fetchPeople(region) };
 
 const connectedWidget = connect(mapStateToProps, mapDispatchToProps)(RegionWidget);
 export { connectedWidget as Regions };
