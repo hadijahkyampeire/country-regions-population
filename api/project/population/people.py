@@ -45,14 +45,10 @@ class PeopleList(Resource):
     def get(self):
         """Get all people records"""
         persons = People.query.all()
-        # query = request.args.get('district').lower()
-<<<<<<< HEAD
         region = request.args.get('region', '').lower()
-=======
-        region = request.args.get("region", "").lower()
->>>>>>> add unit tests
-        # if query:
-        #     persons = People.query.filter_by(district=query).all()
+        district = request.args.get('district', '')
+        if district:
+            persons = People.query.filter_by(district=district).all()
         if region:
             persons = People.query.filter_by(region=region).all()
         response_object = {

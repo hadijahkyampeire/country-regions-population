@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import json
 import os
-=======
 import coverage
 import sys
 import unittest
->>>>>>> add unit tests
 
 from flask.cli import FlaskGroup
 from project import create_app, db

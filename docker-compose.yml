@@ -25,8 +25,8 @@ services:
       context: ./ui
       dockerfile: Dockerfile
     volumes:
+      - /usr/src/app/node_modules
       - ./ui/:/usr/src/app
-      - '/usr/src/app/node_modules'
     ports:
       - 3005:3000
     environment:

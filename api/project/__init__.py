@@ -20,16 +20,10 @@ def create_app(script_info=None):
 
     # set up extensions
     db.init_app(app)
+    cors.init_app(app)
 
-<<<<<<< HEAD
-  # set up extensions
-  db.init_app(app)
-  cors.init_app(app)
-=======
     # register blueprints
     from project.population.people import population_blueprint
->>>>>>> add unit tests
-
     app.register_blueprint(population_blueprint)
 
     # shell context for flask cli
