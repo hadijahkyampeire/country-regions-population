@@ -66,3 +66,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## gyp: No Xcode or CLT version detected! (fsevents problem)
+https://github.com/nodejs/node-gyp/issues/1927

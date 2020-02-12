@@ -4,6 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+black = "==19.10b0"
+flake8 = "===3.7.9"
+isort = "==4.3.21"
+coverage = "*"
 
 [packages]
 flask = "*"
@@ -11,6 +15,7 @@ flask-restful = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
 flask-cors = "*"
+flask-testing = "*"
 
 [requires]
 python_version = "3.7"

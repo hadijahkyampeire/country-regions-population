@@ -1,4 +1,5 @@
-import { FETCH_PEOPLE_PENDING, FETCH_PEOPLE_SUCCESS, FETCH_PEOPLE_ERROR } from 'actions';
+import { 
+  FETCH_PEOPLE_PENDING, FETCH_PEOPLE_SUCCESS, FETCH_PEOPLE_ERROR } from 'actions';
 
 const initialState = {
   pending: false,
@@ -18,7 +19,7 @@ export const people = (state = initialState, action) => {
         ...state,
         pending: false,
         people: { ...state.people, [action.region]: action.payload },
-  
+
       };
     case FETCH_PEOPLE_ERROR:
       return {
@@ -33,7 +34,7 @@ export const people = (state = initialState, action) => {
 
 
 export const getPeople = (region, state) => {
-  return  state.people.people[region] || []
+  return state.people.people[region] || []
 };
 
 export const getPeoplePending = state => state.people.pending;

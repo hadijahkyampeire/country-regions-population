@@ -23,11 +23,11 @@ class People(db.Model):
 
     def to_json(self):
         return {
-          'id': self.id,
-          'name': self.name,
-          'date_of_birth': str(self.date_of_birth),
-          'district': self.district,
-          'country': self.country,
-          'region': self.region,
-          'created': str(self.created)
+            "id": self.id,
+            "name": self.name,
+            "date_of_birth": str(self.date_of_birth),
+            "district": self.district,
+            "country": self.country,
+            "region": self.region,
+            "created": str(self.created),
         }

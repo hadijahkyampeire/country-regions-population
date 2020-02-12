@@ -16,6 +16,7 @@ services:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgresql://postgres:postgres@population_db:5432/population_dev
       - DATABASE_TEST_URL=postgresql://postgres:postgres@population_db:5432/population_test
+      - SECRET_KEY=b52cfa53fc5bdc786f0c7b1765492641c019a87ebab52f5e
     depends_on: 
       - population_db
 
@@ -24,8 +25,8 @@ services:
       context: ./ui
       dockerfile: Dockerfile
     volumes:
+      - /usr/src/app/node_modules
       - ./ui/:/usr/src/app
-      - '/usr/src/app/node_modules'
     ports:
       - 3005:3000
     environment:

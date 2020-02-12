@@ -14,10 +14,12 @@ RUN mkdir -p /usr/src/api
 WORKDIR /usr/src/api
 
 #add and install requirements
-RUN pip install pipenv
-COPY ./Pipfile /usr/src/api
-RUN pipenv lock --requirements > requirements.txt
+RUN pip install --upgrade pip
+RUN pip install pipenv pipenv_to_requirements
+COPY ./Pipfile* /usr/src/api/
+RUN pipenv run pipenv_to_requirements -f
 RUN pip install -r requirements.txt
+RUN pip install -r requirements-dev.txt
 
 # add entrypoint.sh
 COPY ./entrypoint.sh /usr/src/api/entrypoint.sh
